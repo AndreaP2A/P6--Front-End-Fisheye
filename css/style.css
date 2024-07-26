@@ -29,7 +29,7 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px;
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 .photographer_section article {
@@ -43,9 +43,40 @@ h1 {
 .photographer_section article h2 {
   color: #d3573c;
   font-size: 36px;
+  font-weight: 400;
+  margin: 10px 0 0 0;
+  padding: 0;
 }
 
 .photographer_section article img {
   height: 200px;
   width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photographer_section article .location {
+  color: #901c1c;
+  font-family: "DM Sans";
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.photographer_section article .tagline {
+  font-size: 10px;
+  font-family: "DM Sans";
+  color: black;
+  font-weight: 400;
+}
+
+.photographer_section article .price {
+  color: #757575;
+  font-family: "DM Sans";
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.photographer_section article p {
+  margin: 3px 0 0 0;
 }

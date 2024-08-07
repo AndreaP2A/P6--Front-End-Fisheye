@@ -1,8 +1,22 @@
+import { MediaFactory } from "../factories/mediaFactory.js";
+
 class PhotographerTemplate {
-  constructor(data, tabindexStart) {
+  constructor(data, mediaItems, tabindexStart) {
     this.data = data;
+    this.mediaItems = mediaItems;
     this.tabindexStart = tabindexStart;
     this.picture = `assets/photographers/${data.portrait}`;
+    this.photographerName = data.name; // Store photographer name for media path (assets/images/photographer's name/ ...)
+    this.mediaPaths = this.mediaItems.map((item) => {
+      const basePath = `assets/images/${this.photographerName}/`;
+      const fileName = item.image || item.video;
+      if (fileName) {
+        return `${basePath}${fileName}`;
+      } else {
+        console.error("Missing file name for media item:", item);
+        return "";
+      }
+    });
   }
 
   // Photographer card on the index
@@ -61,6 +75,7 @@ class PhotographerTemplate {
 
     return article;
   }
+
   // Photographer card on the hero header of their page
   getPhotographerHeaderDOM() {
     const { name, city, country, tagline } = this.data;
@@ -112,6 +127,41 @@ class PhotographerTemplate {
     header.appendChild(imgDiv);
 
     return header; // Ensure this returns a DOM element
+  }
+
+  // Portfolio on their page, with a media factory
+  getMediaDOM() {
+    const container = document.createElement("div");
+    container.classList.add("media-container");
+
+    this.mediaItems.forEach((mediaItem) => {
+      const mediaFactory = new MediaFactory(mediaItem, this.photographerName);
+      const mediaElement = mediaFactory.createMediaElement();
+
+      const mediaDiv = document.createElement("div");
+      mediaDiv.classList.add("media-item");
+
+      const captionDiv = document.createElement("div");
+      captionDiv.classList.add("caption");
+
+      const title = document.createElement("p");
+      title.innerText = mediaItem.title;
+      title.classList.add("media-title");
+
+      const likes = document.createElement("p");
+      likes.innerText = `${mediaItem.likes} likes`;
+      likes.classList.add("media-likes");
+
+      captionDiv.appendChild(title);
+      captionDiv.appendChild(likes);
+
+      mediaDiv.appendChild(mediaElement);
+      mediaDiv.appendChild(captionDiv);
+
+      container.appendChild(mediaDiv);
+    });
+
+    return container;
   }
 }
 

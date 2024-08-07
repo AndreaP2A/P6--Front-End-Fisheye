@@ -1,26 +1,20 @@
-import { photographerTemplate } from "../templates/photographer.js";
-
-async function getPhotographers() {
-  const response = await fetch("/data/photographers.json");
-  const data = await response.json();
-  return {
-    photographers: data.photographers,
-  };
-}
+import { PhotographerTemplate } from "../templates/photographerTemplate.js";
+import { api } from "../utils/api.js";
 
 async function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer_section");
+  let tabindex = 2;
 
   photographers.forEach((photographer) => {
-    const photographerModel = photographerTemplate(photographer);
+    const photographerModel = new PhotographerTemplate(photographer, tabindex);
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
+    tabindex += 2;
   });
 }
 
 async function init() {
-  // Récupère les datas des photographes
-  const { photographers } = await getPhotographers();
+  const photographers = await api.fetchPhotographers();
   displayData(photographers);
 }
 

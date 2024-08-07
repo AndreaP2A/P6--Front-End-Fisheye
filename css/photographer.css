@@ -24,7 +24,7 @@ body {
 .photograph-header {
   display: flex;
   align-items: center;
-  width: 1110px;
+  width: 1093px;
   height: 313px;
 }
 
@@ -80,6 +80,58 @@ body {
   background-color: var(--secondary-color);
   border-radius: 5px;
   cursor: pointer;
+}
+
+.portfolio {
+  width: 1093px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 95px;
+}
+
+.media {
+  width: 300px;
+  height: 300px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.media img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.media video {
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+}
+
+.media-title {
+  color: var(--secondary-color);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.like-counts {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondary-color);
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  gap: 5px;
 }
 
 .modal {

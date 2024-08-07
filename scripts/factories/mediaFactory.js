@@ -6,7 +6,7 @@ class MediaFactory {
 
   createMediaElement() {
     const mediaDiv = document.createElement("div");
-    mediaDiv.classList.add("media-item");
+    mediaDiv.classList.add("media");
 
     const mediaPath = `assets/images/${this.photographerName}/${
       this.media.image || this.media.video

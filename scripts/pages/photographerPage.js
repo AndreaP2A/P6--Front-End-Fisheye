@@ -1,12 +1,6 @@
 import { PhotographerTemplate } from "../templates/photographerTemplate.js";
 import { api } from "../utils/api.js";
 
-//async function getPhotographerById(id) {
-//const response = await fetch("/data/photographers.json");
-//const data = await response.json();
-//return data.photographers.find((photographer) => photographer.id == id);
-//}
-
 function createMediaElement(mediaItem, photographerName) {
   const mediaDiv = document.createElement("div");
   mediaDiv.classList.add("media-item");
@@ -17,7 +11,7 @@ function createMediaElement(mediaItem, photographerName) {
 
   const likes = document.createElement("div");
   likes.classList.add("media-likes");
-  likes.textContent = `${mediaItem.likes} Likes`;
+  likes.textContent = `${mediaItem.likes}`;
 
   mediaDiv.appendChild(title);
   mediaDiv.appendChild(likes);

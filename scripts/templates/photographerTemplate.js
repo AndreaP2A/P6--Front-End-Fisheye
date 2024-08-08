@@ -1,4 +1,5 @@
 import { MediaFactory } from "../factories/mediaFactory.js";
+import { displayModal } from "../utils/contactForm.js";
 
 class PhotographerTemplate {
   constructor(data, mediaItems = [], tabindexStart) {
@@ -7,17 +8,6 @@ class PhotographerTemplate {
     this.tabindexStart = tabindexStart;
     this.picture = `assets/photographers/${data.portrait}`;
     this.photographerName = data.name; // Store photographer name for media path (assets/images/photographer's name/ ...)
-    //remplacer avec ma mediaFactory
-    this.mediaPaths = this.mediaItems.map((item) => {
-      const basePath = `assets/images/${this.photographerName}/`;
-      const fileName = item.image || item.video;
-      if (fileName) {
-        return `${basePath}${fileName}`;
-      } else {
-        console.error("Missing file name for media item:", item);
-        return "";
-      }
-    });
   }
 
   // Photographer card on the index
@@ -83,11 +73,9 @@ class PhotographerTemplate {
   getPhotographerHeaderDOM() {
     const { name, city, country, tagline } = this.data;
 
-    // Hero header
     const header = document.createElement("div");
     header.className = "photograph-header-container";
 
-    // Name/location/tagline
     const infoDiv = document.createElement("div");
     infoDiv.classList.add("info");
 
@@ -104,17 +92,15 @@ class PhotographerTemplate {
     taglineElement.innerText = tagline;
     taglineElement.classList.add("tagline");
     infoDiv.appendChild(taglineElement);
-
-    // Contact button (removed from hardcoded HTML)
+    // Contact button (removed from hardcoded HTML to be generated through here instead)
     const contactButtonDiv = document.createElement("div");
     contactButtonDiv.classList.add("contact-button-container");
 
     const contactButton = document.createElement("button");
     contactButton.classList.add("contact_button");
     contactButton.innerText = "Contactez-moi";
-    contactButton.setAttribute("onclick", "displayModal()");
+    contactButton.addEventListener("click", displayModal);
     contactButtonDiv.appendChild(contactButton);
-
     // Profile Pic
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("image-container");
@@ -123,7 +109,6 @@ class PhotographerTemplate {
     img.setAttribute("src", this.picture);
     img.setAttribute("alt", name);
     imgDiv.appendChild(img);
-
     // Append everything to the hero header
     header.appendChild(infoDiv);
     header.appendChild(contactButtonDiv);
@@ -151,7 +136,6 @@ class PhotographerTemplate {
       title.innerText = mediaItem.title;
       title.classList.add("media-title");
 
-      // Like button + counter
       const likeCountsDiv = document.createElement("div");
       likeCountsDiv.classList.add("like-counts");
 
@@ -173,11 +157,10 @@ class PhotographerTemplate {
         "d",
         "M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z"
       );
-      path.setAttribute("fill", "none"); // Default to outline color
-      path.setAttribute("stroke", "var(--secondary-color)"); // Outline color
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", "var(--secondary-color)");
       likeIcon.appendChild(path);
 
-      // Event listener for like clicks
       likeIcon.addEventListener("click", () =>
         this.toggleLike(likeIcon, likeCountsDiv, mediaItem)
       );

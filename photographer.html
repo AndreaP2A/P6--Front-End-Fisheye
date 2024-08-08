@@ -18,18 +18,30 @@
     <div class="photograph-header">
     </div>
   </main>
-  <div id="contact_modal">
-    <div class="modal">
+  <div id="contact_modal" class="modal">
+    <div class="modal-content">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()">
+        <img src="assets/icons/close.svg" alt="Close modal" class="close-modal" onclick="closeModal()">
       </header>
       <form>
         <div>
-          <label>Prénom</label>
-          <input>
+          <label for="firstName">Prénom</label>
+          <input id="firstName" type="text" required>
         </div>
-        <button class="contact_button">Envoyer</button>
+        <div>
+          <label for="lastName">Nom</label>
+          <input id="lastName" type="text" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" required>
+        </div>
+        <div>
+          <label for="message">Votre message</label>
+          <textarea id="message" required></textarea>
+        </div>
+        <button type="submit" class="contact_button">Envoyer</button>
       </form>
     </div>
   </div>

@@ -17,12 +17,20 @@
   <main id="main">
     <div class="photograph-header">
     </div>
+    <div class="sort-container">
+      <label for="sort-by">Trier par </label>
+      <select id="sort-by" aria-label="Trier les médias">
+        <option value="likes">Popularité</option>
+        <option value="date">Date</option>
+        <option value="title">Titre</option>
+      </select>
+    </div>
   </main>
   <div id="contact_modal" class="modal">
     <div class="modal-content">
       <header>
-        <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" alt="Close modal" class="close-modal" onclick="closeModal()">
+        <h2 id="modal_title">Contactez-moi</h2>
+        <img src="assets/icons/close.svg" alt="Fermer le formulaire de contact" class="close-modal">
       </header>
       <form>
         <div>
@@ -45,10 +53,10 @@
       </form>
     </div>
   </div>
-  <script type="module" src="scripts/templates/photographerTemplate.js"></script>
-  <script type="module" src="scripts/pages/photographerPage.js"></script>
-  <script type="module" src="scripts/utils/contactForm.js"></script>
-  <script type="module" src="scripts/utils/homeButton.js"></script>
+  <script type="module" src="scripts/utils/contactForm.js" defer></script>
+  <script type="module" src="scripts/templates/photographerTemplate.js" defer></script>
+  <script type="module" src="scripts/pages/photographerPage.js" defer></script>
+  <script type="module" src="scripts/utils/homeButton.js" defer></script>
 </body>
 
 </html>

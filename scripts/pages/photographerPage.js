@@ -28,10 +28,64 @@ async function displayPhotographer(photographer) {
 
   main.appendChild(photographerHeader);
 
-  // Create and append media container
-  const mediaContainer = photographerModel.getMediaDOM();
+  // Create and append sort container
+  const sortContainer = document.createElement("div");
+  sortContainer.classList.add("sort-container");
 
+  const sortLabel = document.createElement("label");
+  sortLabel.setAttribute("for", "sort-by");
+  sortLabel.textContent = "Trier par ";
+
+  const sortSelect = document.createElement("select");
+  sortSelect.id = "sort-by";
+  sortSelect.setAttribute("aria-label", "Trier les médias");
+
+  const options = [
+    { value: "likes", text: "Popularité" },
+    { value: "date", text: "Date" },
+    { value: "title", text: "Titre" },
+  ];
+
+  options.forEach((optionData) => {
+    const option = document.createElement("option");
+    option.value = optionData.value;
+    option.textContent = optionData.text;
+    sortSelect.appendChild(option);
+  });
+
+  sortContainer.appendChild(sortLabel);
+  sortContainer.appendChild(sortSelect);
+  main.appendChild(sortContainer);
+
+  // Create and append media container
+  let mediaContainer = photographerModel.getMediaDOM();
   main.appendChild(mediaContainer);
+
+  // Add event listener for sorting
+  sortSelect.addEventListener("change", () => {
+    const sortedMedia = sortMedia(media, sortSelect.value);
+    // Clear existing media container
+    mediaContainer.innerHTML = "";
+    // Re-render the sorted media
+    sortedMedia.forEach((mediaItem) => {
+      const mediaFactory = new PhotographerTemplate(photographer, [mediaItem]);
+      const mediaElement = mediaFactory.getMediaDOM();
+      mediaContainer.appendChild(mediaElement.firstChild);
+    });
+  });
+}
+
+// Sorting function
+function sortMedia(media, criteria) {
+  return media.slice().sort((a, b) => {
+    if (criteria === "likes") {
+      return b.likes - a.likes;
+    } else if (criteria === "date") {
+      return new Date(b.date) - new Date(a.date);
+    } else if (criteria === "title") {
+      return a.title.localeCompare(b.title);
+    }
+  });
 }
 
 async function init() {
@@ -42,7 +96,11 @@ async function init() {
     const photographer = await api.fetchPhotographerById(id);
     if (photographer) {
       displayPhotographer(photographer);
+    } else {
+      console.error("Photographer not found");
     }
+  } else {
+    console.error("No photographer ID provided in the URL");
   }
 }
 

@@ -1,14 +1,23 @@
+/* ==============================================
+  =================== MAIN ======================
+  ============================================== */
+
 :root {
   --main-color: #d3573c;
   --secondary-color: #901c1c;
   --tertiary-color: #db8876;
 }
 
-body {
-  width: 100%;
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
 }
 
 #main {
@@ -17,9 +26,9 @@ body {
   margin: 0px 100px 0px 100px;
 }
 
-#contact_modal {
-  display: none;
-}
+/* ==============================================
+  ================ HERO HEADER ==================
+  ============================================== */
 
 .photograph-header {
   display: flex;
@@ -39,26 +48,18 @@ body {
   padding: 0 50px;
 }
 
-.photograph-header .info {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  margin: 0;
-}
-
-.photograph-header img {
-  height: 200px;
-  width: 200px;
-  object-fit: cover;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 .photograph-header h2 {
   color: var(--main-color);
   font-size: 64px;
   font-style: normal;
   font-weight: 400;
+  margin: 0;
+}
+
+.photograph-header .info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   margin: 0;
 }
 
@@ -81,6 +82,18 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.photograph-header img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ==============================================
+  ================= PORTFOLIO ===================
+  ============================================== */
 
 .portfolio {
   width: 1093px;
@@ -134,31 +147,53 @@ body {
   gap: 5px;
 }
 
-.modal {
-  border-radius: 5px;
-  background-color: var(--tertiary-color);
-  width: 50%;
+/* ==============================================
+  =============== CONTACT MODAL =================
+  ============================================== */
+
+#contact_modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  padding: 35px;
+  overflow: auto;
+  background-color: rgba(196, 196, 196, 0.4);
+}
+
+.modal-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  margin: 0 auto;
+  width: 550px;
+  background-color: var(--tertiary-color);
+  border-radius: 5px;
   padding: 35px;
-  margin: auto;
+  gap: 20px;
+  flex-grow: 1;
 }
 
 .modal header {
+  display: flex;
   justify-content: space-between;
+  align-items: start;
   width: 100%;
 }
 
 .modal header img {
   cursor: pointer;
+  width: 30px;
+  height: 30px;
 }
 
 .modal header h2 {
-  font-size: 64px;
+  font-size: 46px;
   font-weight: normal;
-  text-align: center;
+  width: 100%;
 }
 
 form {
@@ -166,11 +201,16 @@ form {
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
+  flex-grow: 1;
 }
 
 form label {
   color: #312e2e;
-  font-size: 36px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 5px 0px;
 }
 
 form div {
@@ -178,12 +218,20 @@ form div {
   flex-direction: column;
   width: 100%;
   align-items: self-start;
-  margin-bottom: 26px;
+  padding: 5px 0px;
 }
 
 form input {
   width: 100%;
-  height: 68px;
+  height: 50px;
   border: none;
   border-radius: 5px;
+}
+
+#message {
+  width: 100%;
+  height: 120px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }

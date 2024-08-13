@@ -92,6 +92,7 @@ class PhotographerTemplate {
     taglineElement.innerText = tagline;
     taglineElement.classList.add("tagline");
     infoDiv.appendChild(taglineElement);
+
     // Contact button (removed from hardcoded HTML to be generated through here instead)
     const contactButtonDiv = document.createElement("div");
     contactButtonDiv.classList.add("contact-button-container");
@@ -99,8 +100,12 @@ class PhotographerTemplate {
     const contactButton = document.createElement("button");
     contactButton.classList.add("contact_button");
     contactButton.innerText = "Contactez-moi";
-    contactButton.addEventListener("click", displayModal);
+
+    contactButton.addEventListener("click", () =>
+      displayModal(this.photographerName)
+    );
     contactButtonDiv.appendChild(contactButton);
+
     // Profile Pic
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("image-container");

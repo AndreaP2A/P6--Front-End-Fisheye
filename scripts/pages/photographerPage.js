@@ -1,5 +1,8 @@
 import { PhotographerTemplate } from "../templates/photographerTemplate.js";
 import { api } from "../utils/api.js";
+import { Lightbox } from "../utils/lightbox.js"; // Import Lightbox
+
+let sortedMedia = []; // Keep track of sorted media globally
 
 async function displayPhotographer(photographer) {
   const main = document.querySelector("main");
@@ -13,7 +16,6 @@ async function displayPhotographer(photographer) {
 
   const media = await api.fetchMediaByPhotographerId(photographer.id);
 
-  // Check if media is correctly fetched
   if (!media || media.length === 0) {
     console.error(
       "Aucun média n'a été trouvé pour ce photographe:",
@@ -21,6 +23,8 @@ async function displayPhotographer(photographer) {
     );
     return;
   }
+
+  sortedMedia = [...media]; // Initialize sortedMedia with the fetched media
 
   const photographerModel = new PhotographerTemplate(photographer, media);
   const headerContent = photographerModel.getPhotographerHeaderDOM();
@@ -61,17 +65,27 @@ async function displayPhotographer(photographer) {
   let mediaContainer = photographerModel.getMediaDOM();
   main.appendChild(mediaContainer);
 
+  // Initialize the lightbox
+  const lightbox = new Lightbox(photographer.name, sortedMedia);
+
   // Add event listener for sorting
   sortSelect.addEventListener("change", () => {
-    const sortedMedia = sortMedia(media, sortSelect.value);
-    // Clear existing media container
+    sortedMedia = sortMedia(media, sortSelect.value);
     mediaContainer.innerHTML = "";
-    // Re-render the sorted media
     sortedMedia.forEach((mediaItem) => {
       const mediaFactory = new PhotographerTemplate(photographer, [mediaItem]);
       const mediaElement = mediaFactory.getMediaDOM();
       mediaContainer.appendChild(mediaElement.firstChild);
     });
+    lightbox.sortedMedia = sortedMedia; // Update lightbox with new sorted media
+  });
+
+  // Add event listener for media clicks to open lightbox
+  mediaContainer.addEventListener("click", (event) => {
+    const mediaItemElement = event.target.closest(".item");
+    if (mediaItemElement) {
+      lightbox.handleMediaClick(mediaItemElement, mediaContainer);
+    }
   });
 }
 

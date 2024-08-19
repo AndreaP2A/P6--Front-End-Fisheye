@@ -53,6 +53,23 @@
       </form>
     </div>
   </div>
+
+  <div id="lightbox_modal" class="lightbox-modal" aria-hidden="true" role="dialog"
+    aria-labelledby="lightbox-media-title">
+    <!-- Whole Lightbox Container -->
+    <div class="lightbox-content">
+      <!-- Media Container -->
+      <div class="lightbox-media-container" aria-live="polite">
+      </div>
+      <!-- Media Title -->
+      <p class="lightbox-media-title"></p>
+      <!-- Navigation Buttons -->
+      <button id="prevButton" class="lightbox-prev" aria-label="Previous media"></button>
+      <button id="nextButton" class="lightbox-next" aria-label="Next media"></button>
+      <button id="closeButton" class="lightbox-close" aria-label="Close lightbox"></button>
+    </div>
+  </div>
+
   <script type="module" src="scripts/utils/contactForm.js" defer></script>
   <script type="module" src="scripts/templates/photographerTemplate.js" defer></script>
   <script type="module" src="scripts/pages/photographerPage.js" defer></script>

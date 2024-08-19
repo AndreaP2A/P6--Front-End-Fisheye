@@ -50,7 +50,7 @@ body {
 
 .photograph-header h2 {
   color: var(--main-color);
-  font-size: 64px;
+  font-size: 56px;
   font-style: normal;
   font-weight: 400;
   margin: 0;
@@ -68,6 +68,10 @@ body {
   font-size: 24px;
   font-weight: 400;
   margin: 0;
+}
+
+.photographer-header .tagline {
+  line-height: 4;
 }
 
 .contact_button {
@@ -234,4 +238,94 @@ form input {
   border: none;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+/* ==============================================
+  ================== LIGHTBOX ===================
+  ============================================== */
+
+.lightbox-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border: 1px solid red;
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 930px;
+  max-width: 95%;
+  height: auto;
+  max-height: 95%;
+}
+
+.lightbox-media-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.lightbox-media-container .media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80vh;
+}
+
+.lightbox-media-container img,
+.lightbox-media-container video {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  width: 96px;
+  height: 96px;
+  border: none;
+  position: absolute;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  top: 50%;
+  background: url(../assets/icons/arrow.svg) no-repeat;
+  z-index: 1009;
+}
+
+.lightbox-close {
+  right: 50px;
+  background: url(../assets/icons/lightbox-close.svg) no-repeat;
+}
+
+.lightbox-prev {
+  left: 50px;
+}
+
+.lightbox-next {
+  right: 50px;
+  transform: rotate(-180deg);
+}
+
+.lightbox-media-title {
+  color: var(--secondary-color);
+  font-size: 20px;
 }

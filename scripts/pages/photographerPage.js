@@ -87,9 +87,39 @@ async function displayPhotographer(photographer) {
       lightbox.handleMediaClick(mediaItemElement, mediaContainer);
     }
   });
+
+  // Calculate total likes
+  const totalLikes = sortedMedia.reduce(
+    (sum, mediaItem) => sum + mediaItem.likes,
+    0
+  );
+
+  // Create and append the price and likes div
+  const priceLikesButton = document.createElement("div");
+  priceLikesButton.classList.add("price-likes-button");
+
+  const likesElement = document.createElement("p");
+  likesElement.classList.add("total-likes");
+  likesElement.textContent = `${totalLikes} ♥`;
+
+  const priceElement = document.createElement("p");
+  priceElement.classList.add("price");
+  priceElement.textContent = `${photographer.price} € / jour`;
+
+  priceLikesButton.appendChild(likesElement);
+  priceLikesButton.appendChild(priceElement);
+
+  document.body.appendChild(priceLikesButton); // Append to body so it overlays other content
 }
 
 // Sorting function
+
+/**
+ *
+ * @param {*} media
+ * @param {*} criteria
+ * @returns {Array} Sorting function on the portfolio
+ */
 function sortMedia(media, criteria) {
   return media.slice().sort((a, b) => {
     if (criteria === "likes") {
@@ -102,6 +132,9 @@ function sortMedia(media, criteria) {
   });
 }
 
+/**
+ * Initialize the page
+ */
 async function init() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");

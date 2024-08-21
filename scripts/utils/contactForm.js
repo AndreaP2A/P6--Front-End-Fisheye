@@ -1,3 +1,7 @@
+/**
+ * Displaying the contact form with the name of the photographer
+ * @param {*} photographerName
+ */
 function displayModal(photographerName) {
   console.log("La fonction d'affichage de cette modale s'est bien déclenché !"); //for debugging
 
@@ -13,6 +17,9 @@ function displayModal(photographerName) {
   }
 }
 
+/**
+ * Closes the modal
+ */
 function closeModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";

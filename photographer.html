@@ -54,15 +54,14 @@
     </div>
   </div>
 
-  <div id="lightbox_modal" class="lightbox-modal" aria-hidden="true" role="dialog"
-    aria-labelledby="lightbox-media-title">
+  <div id="lightbox_modal" class="lightbox-modal" role="dialog" aria-labelledby="lightbox-media-title">
     <!-- Whole Lightbox Container -->
-    <div class="lightbox-content">
+    <div class="lightbox-content" aria-label="Image closeup view" tabindex="0">
       <!-- Media Container -->
-      <div class="lightbox-media-container" aria-live="polite">
+      <div class="lightbox-media-container">
       </div>
       <!-- Media Title -->
-      <p class="lightbox-media-title"></p>
+      <p class="lightbox-media-title" tabindex="0"></p>
       <!-- Navigation Buttons -->
       <button id="prevButton" class="lightbox-prev" aria-label="Previous media"></button>
       <button id="nextButton" class="lightbox-next" aria-label="Next media"></button>

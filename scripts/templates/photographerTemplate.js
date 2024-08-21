@@ -10,7 +10,10 @@ class PhotographerTemplate {
     this.photographerName = data.name; // Store photographer name for media path (assets/images/photographer's name/ ...)
   }
 
-  // Photographer card on the index
+  /**
+   * Photographer card on the index
+   * @returns {HTMLElement} User card container
+   */
   getUserCardDOM() {
     const { name, city, country, tagline, price } = this.data;
     const article = document.createElement("article");
@@ -68,7 +71,7 @@ class PhotographerTemplate {
 
   /**
    * Photographer card on the hero header of their page
-   * @returns header HTML string
+   * @returns {HTMLElement} Header container
    */
   getPhotographerHeaderDOM() {
     const { name, city, country, tagline } = this.data;
@@ -122,7 +125,10 @@ class PhotographerTemplate {
     return header;
   }
 
-  // Portfolio on their page, with a media factory
+  /**
+   * Portfolio on their page, with a media factory
+   * @returns {HTMLElement} Portfolio container
+   */
   getMediaDOM() {
     const container = document.createElement("div");
     container.classList.add("portfolio");
@@ -189,6 +195,12 @@ class PhotographerTemplate {
     return container;
   }
 
+  /**
+   *
+   * @param {*} likeIcon
+   * @param {*} likeCountsDiv
+   * @param {*} mediaItem
+   */
   toggleLike(likeIcon, likeCountsDiv, mediaItem) {
     const isLiked = likeIcon.classList.toggle("liked");
     let currentLikes =

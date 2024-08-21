@@ -1,10 +1,15 @@
-// Handling data fetching, no repetition !
-
+/**
+ * API class to fetch data from the JSON
+ */
 class API {
   constructor(baseURL) {
     this.baseURL = baseURL;
   }
 
+  /**
+   *
+   * @returns {Promise<Array>} List of photographers
+   */
   async fetchPhotographers() {
     const response = await fetch(`${this.baseURL}/photographers.json`);
     const data = await response.json();
@@ -16,6 +21,10 @@ class API {
     return photographers.find((photographer) => photographer.id == id);
   }
 
+  /**
+   *
+   * @returns {Promise<Array>} List of media
+   */
   async fetchMedia() {
     const response = await fetch(`${this.baseURL}/photographers.json`);
     const data = await response.json();

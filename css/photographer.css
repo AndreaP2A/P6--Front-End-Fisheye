@@ -76,15 +76,23 @@ body {
 
 .contact_button {
   font-size: 20px;
-  font-weight: bold;
+  font-style: normal;
+  font-weight: 700;
   color: white;
   padding: 11px;
   width: 170px;
   height: 70px;
+
   border: none;
   background-color: var(--secondary-color);
   border-radius: 5px;
   cursor: pointer;
+}
+
+.contact_button:hover,
+.contact_button:focus {
+  color: black;
+  background-color: var(--tertiary-color);
 }
 
 .photograph-header img {
@@ -145,10 +153,35 @@ body {
   justify-content: center;
   align-items: center;
   color: var(--secondary-color);
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   margin: 0;
   gap: 5px;
+}
+
+.price-likes-button {
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+  background-color: var(--tertiary-color);
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.total-likes {
+  font-size: 1.2em;
+}
+
+.price-per-day {
+  font-size: 1.2em;
 }
 
 /* ==============================================
@@ -269,6 +302,7 @@ form input {
 }
 
 .lightbox-media-container {
+  order: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -277,6 +311,7 @@ form input {
 }
 
 .lightbox-media-container .media {
+  order: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -312,20 +347,24 @@ form input {
 }
 
 .lightbox-close {
+  order: 6;
   right: 50px;
   background: url(../assets/icons/lightbox-close.svg) no-repeat;
 }
 
 .lightbox-prev {
+  order: 4;
   left: 50px;
 }
 
 .lightbox-next {
+  order: 5;
   right: 50px;
   transform: rotate(-180deg);
 }
 
 .lightbox-media-title {
+  order: 3;
   color: var(--secondary-color);
   font-size: 20px;
 }

@@ -25,6 +25,10 @@ export class Lightbox {
     this.prevButton.addEventListener("click", () => this.showPrevMedia());
   }
 
+  /**
+   *
+   * @param {*} index
+   */
   openLightbox(index) {
     this.currentMediaIndex = index;
     this.lightboxModal.style.display = "flex";
@@ -35,6 +39,10 @@ export class Lightbox {
     this.lightboxModal.style.display = "none";
   }
 
+  /**
+   *
+   * @param {*} mediaItem
+   */
   displayMediaInLightbox(mediaItem) {
     this.lightboxContent.innerHTML = "";
     const mediaFactory = new MediaFactory(mediaItem, this.photographerName);
@@ -59,6 +67,11 @@ export class Lightbox {
     }
   }
 
+  /**
+   *
+   * @param {*} mediaItemElement
+   * @param {*} mediaContainer
+   */
   handleMediaClick(mediaItemElement, mediaContainer) {
     const index = Array.from(mediaContainer.children).indexOf(mediaItemElement);
     this.openLightbox(index);

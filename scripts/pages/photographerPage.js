@@ -4,6 +4,11 @@ import { Lightbox } from "../utils/lightbox.js"; // Import Lightbox
 
 let sortedMedia = []; // Keep track of sorted media globally
 
+/**
+ *
+ * @param {*} photographer
+ * @returns {HTMLElement} Photographer information
+ */
 async function displayPhotographer(photographer) {
   const main = document.querySelector("main");
   if (!main) return;
@@ -39,10 +44,12 @@ async function displayPhotographer(photographer) {
   const sortLabel = document.createElement("label");
   sortLabel.setAttribute("for", "sort-by");
   sortLabel.textContent = "Trier par ";
+  sortLabel.setAttribute("aria-label", "Order by");
+  sortLabel.setAttribute("tabindex", "0");
 
   const sortSelect = document.createElement("select");
   sortSelect.id = "sort-by";
-  sortSelect.setAttribute("aria-label", "Trier les médias");
+  sortSelect.setAttribute("tabindex", "0");
 
   const options = [
     { value: "likes", text: "Popularité" },
@@ -54,6 +61,7 @@ async function displayPhotographer(photographer) {
     const option = document.createElement("option");
     option.value = optionData.value;
     option.textContent = optionData.text;
+    option.setAttribute("aria-label", optionData.text); // Ensure each option is labeled
     sortSelect.appendChild(option);
   });
 
@@ -97,22 +105,50 @@ async function displayPhotographer(photographer) {
   // Create and append the price and likes div
   const priceLikesButton = document.createElement("div");
   priceLikesButton.classList.add("price-likes-button");
+  priceLikesButton.setAttribute("tabindex", "0");
+
+  const likesContainer = document.createElement("div");
+  likesContainer.classList.add("likes-container");
 
   const likesElement = document.createElement("p");
   likesElement.classList.add("total-likes");
-  likesElement.textContent = `${totalLikes} ♥`;
+  likesElement.textContent = `${totalLikes}`;
+  likesElement.setAttribute("aria-label", `${totalLikes} likes`);
+
+  const heartIcon = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+  heartIcon.setAttribute("width", "29");
+  heartIcon.setAttribute("height", "22");
+  heartIcon.setAttribute("viewBox", "0 0 21 24");
+  heartIcon.setAttribute("fill", "black");
+  heartIcon.classList.add("heart-icon");
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute(
+    "d",
+    "M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z"
+  );
+  path.setAttribute("fill", "black");
+  path.setAttribute("stroke", "black");
+  heartIcon.appendChild(path);
+
+  likesContainer.appendChild(likesElement);
+  likesContainer.appendChild(heartIcon);
 
   const priceElement = document.createElement("p");
   priceElement.classList.add("price");
   priceElement.textContent = `${photographer.price} € / jour`;
+  priceElement.setAttribute(
+    "aria-label",
+    `${photographer.price} euros par jour`
+  );
 
-  priceLikesButton.appendChild(likesElement);
+  priceLikesButton.appendChild(likesContainer);
   priceLikesButton.appendChild(priceElement);
 
   document.body.appendChild(priceLikesButton); // Append to body so it overlays other content
 }
-
-// Sorting function
 
 /**
  *

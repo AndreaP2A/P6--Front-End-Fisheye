@@ -11,7 +11,7 @@ class PhotographerTemplate {
   }
 
   /**
-   * Photographer card on the index
+   * Photographer card on the index.html
    * @returns {HTMLElement} User card container
    */
   getUserCardDOM() {
@@ -71,7 +71,7 @@ class PhotographerTemplate {
 
   /**
    * Photographer card on the hero header of their page
-   * @returns {HTMLElement} Header container
+   * @returns {HTMLElement} Hero-header container
    */
   getPhotographerHeaderDOM() {
     const { name, city, country, tagline } = this.data;
@@ -84,16 +84,19 @@ class PhotographerTemplate {
 
     const h2 = document.createElement("h2");
     h2.innerText = name;
+    h2.setAttribute("tabindex", "0"); // Make the photographer's name focusable
     infoDiv.appendChild(h2);
 
     const location = document.createElement("p");
     location.innerText = `${city}, ${country}`;
     location.classList.add("location");
+    location.setAttribute("tabindex", "0");
     infoDiv.appendChild(location);
 
     const taglineElement = document.createElement("p");
     taglineElement.innerText = tagline;
     taglineElement.classList.add("tagline");
+    taglineElement.setAttribute("tabindex", "0");
     infoDiv.appendChild(taglineElement);
 
     // Contact button (removed from hardcoded HTML to be generated through here instead)
@@ -103,6 +106,8 @@ class PhotographerTemplate {
     const contactButton = document.createElement("button");
     contactButton.classList.add("contact_button");
     contactButton.innerText = "Contactez-moi";
+    contactButton.setAttribute("aria-label", "Contact-me");
+    contactButton.setAttribute("tabindex", "0");
 
     contactButton.addEventListener("click", () =>
       displayModal(this.photographerName)
@@ -117,6 +122,7 @@ class PhotographerTemplate {
     img.setAttribute("src", this.picture);
     img.setAttribute("alt", name);
     imgDiv.appendChild(img);
+    img.setAttribute("tabindex", "0"); // Make profile picture focusable
     // Append everything to the hero header
     header.appendChild(infoDiv);
     header.appendChild(contactButtonDiv);
@@ -136,6 +142,8 @@ class PhotographerTemplate {
     this.mediaItems.forEach((mediaItem) => {
       const mediaFactory = new MediaFactory(mediaItem, this.photographerName);
       const mediaElement = mediaFactory.createMediaElement();
+      mediaElement.setAttribute("tabindex", "0"); // Make media focusable
+      mediaElement.setAttribute("aria-label", mediaItem.title);
 
       const mediaDiv = document.createElement("div");
       mediaDiv.classList.add("item");
@@ -146,9 +154,12 @@ class PhotographerTemplate {
       const title = document.createElement("p");
       title.innerText = mediaItem.title;
       title.classList.add("media-title");
+      title.setAttribute("tabindex", "0"); // Make title focusable
 
       const likeCountsDiv = document.createElement("div");
       likeCountsDiv.classList.add("like-counts");
+      likeCountsDiv.setAttribute("tabindex", "0"); // Make like count focusable
+      likeCountsDiv.setAttribute("aria-label", `${mediaItem.likes} likes`);
 
       const likeIcon = document.createElementNS(
         "http://www.w3.org/2000/svg",
@@ -199,9 +210,8 @@ class PhotographerTemplate {
    *
    * @param {*} likeIcon
    * @param {*} likeCountsDiv
-   * @param {*} mediaItem
    */
-  toggleLike(likeIcon, likeCountsDiv, mediaItem) {
+  toggleLike(likeIcon, likeCountsDiv) {
     const isLiked = likeIcon.classList.toggle("liked");
     let currentLikes =
       parseInt(

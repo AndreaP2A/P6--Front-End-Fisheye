@@ -16,14 +16,16 @@
 
 body {
   width: 100%;
-  margin: 0 auto;
   padding: 0;
 }
 
 #main {
   display: flex;
   flex-direction: column;
-  margin: 0px 100px 0px 100px;
+  margin: 0 auto;
+  width: 100%;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 /* ==============================================
@@ -104,6 +106,37 @@ body {
 }
 
 /* ==============================================
+  ================== SORTING ====================
+  ============================================== */
+
+.sort-container {
+  padding: 10px 0 30px 0;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.sort-container label,
+.sort-container select {
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sort-container label {
+  color: black;
+}
+
+.sort-container select {
+  border-radius: 5px;
+  width: 170px;
+  height: 60px;
+  text-align: center;
+  color: white;
+  background-color: var(--secondary-color);
+}
+
+/* ==============================================
   ================= PORTFOLIO ===================
   ============================================== */
 
@@ -113,7 +146,6 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
   gap: 95px;
 }
 
@@ -138,13 +170,16 @@ body {
 
 .caption {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  height: 65px;
 }
 
 .media-title {
   color: var(--secondary-color);
-  font-size: 24px;
+  font-size: 1.2rem;
   font-weight: 400;
+  overflow-wrap: break-word;
 }
 
 .like-counts {
@@ -158,6 +193,10 @@ body {
   margin: 0;
   gap: 5px;
 }
+
+/* ==============================================
+  =============== LIKES + PRICE =================
+  ============================================== */
 
 .price-likes-button {
   position: fixed;
@@ -176,6 +215,12 @@ body {
   z-index: 1000;
 }
 
+.likes-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .total-likes {
   font-size: 1.2em;
 }
@@ -191,7 +236,7 @@ body {
 #contact_modal {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 2000;
   left: 0;
   top: 0;
   margin: 0 auto;
@@ -212,6 +257,7 @@ body {
   padding: 35px;
   gap: 20px;
   flex-grow: 1;
+  box-shadow: -5px 10px 30px 0px rgba(0, 0, 0, 0.25);
 }
 
 .modal header {
@@ -367,4 +413,6 @@ form input {
   order: 3;
   color: var(--secondary-color);
   font-size: 20px;
+  text-align: left;
+  padding: 5px;
 }

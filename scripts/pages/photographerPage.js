@@ -13,7 +13,7 @@ async function displayPhotographer(photographer) {
   const main = document.querySelector("main");
   if (!main) return;
 
-  main.innerHTML = ""; // Clear existing content
+  main.innerHTML = "";
 
   // Create and append photographer hero header
   const photographerHeader = document.createElement("div");
@@ -85,7 +85,7 @@ async function displayPhotographer(photographer) {
       const mediaElement = mediaFactory.getMediaDOM();
       mediaContainer.appendChild(mediaElement.firstChild);
     });
-    lightbox.sortedMedia = sortedMedia; // Update lightbox with new sorted media
+    lightbox.sortedMedia = sortedMedia; // Update lightbox with new sorted media (issue #2)
   });
 
   // Add event listener for media clicks to open lightbox
@@ -93,6 +93,16 @@ async function displayPhotographer(photographer) {
     const mediaItemElement = event.target.closest(".item");
     if (mediaItemElement) {
       lightbox.handleMediaClick(mediaItemElement, mediaContainer);
+    }
+  });
+
+  // Add event listener for media keypress to open lightbox (issue #3)
+  mediaContainer.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      const mediaItemElement = event.target.closest(".item");
+      if (mediaItemElement) {
+        lightbox.handleMediaClick(mediaItemElement, mediaContainer);
+      }
     }
   });
 

@@ -24,7 +24,7 @@ class PhotographerTemplate {
     link.setAttribute("href", `photographer.html?${params.toString()}`);
     link.setAttribute("class", "link");
     link.setAttribute("aria-label", name);
-    link.setAttribute("tabindex", this.tabindexStart);
+    link.setAttribute("tabindex", "0");
     link.style.cursor = "pointer";
 
     const img = document.createElement("img");
@@ -42,7 +42,7 @@ class PhotographerTemplate {
     const description = document.createElement("div");
     description.setAttribute("class", "description");
     description.setAttribute("role", "presentation");
-    description.setAttribute("tabindex", this.tabindexStart + 1);
+    description.setAttribute("tabindex", "0");
 
     const location = document.createElement("p");
     location.innerText = `${city}, ${country}`;
@@ -142,7 +142,7 @@ class PhotographerTemplate {
     this.mediaItems.forEach((mediaItem) => {
       const mediaFactory = new MediaFactory(mediaItem, this.photographerName);
       const mediaElement = mediaFactory.createMediaElement();
-      mediaElement.setAttribute("tabindex", "0"); // Make media focusable
+      mediaElement.setAttribute("tabindex", "0");
       mediaElement.setAttribute("aria-label", mediaItem.title);
 
       const mediaDiv = document.createElement("div");
@@ -154,11 +154,11 @@ class PhotographerTemplate {
       const title = document.createElement("p");
       title.innerText = mediaItem.title;
       title.classList.add("media-title");
-      title.setAttribute("tabindex", "0"); // Make title focusable
+      title.setAttribute("tabindex", "0");
 
       const likeCountsDiv = document.createElement("div");
       likeCountsDiv.classList.add("like-counts");
-      likeCountsDiv.setAttribute("tabindex", "0"); // Make like count focusable
+      likeCountsDiv.setAttribute("tabindex", "0");
       likeCountsDiv.setAttribute("aria-label", `${mediaItem.likes} likes`);
 
       const likeIcon = document.createElementNS(
@@ -183,9 +183,24 @@ class PhotographerTemplate {
       path.setAttribute("stroke", "var(--secondary-color)");
       likeIcon.appendChild(path);
 
-      likeIcon.addEventListener("click", () =>
-        this.toggleLike(likeIcon, likeCountsDiv, mediaItem)
-      );
+      // Prevent lightbox from opening when like icon is clicked (issue #4)
+      likeIcon.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.toggleLike(likeIcon, likeCountsDiv);
+      });
+
+      likeCountsDiv.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.toggleLike(likeIcon, likeCountsDiv);
+      });
+
+      // Add keyboard accessibility for .like-counts
+      likeCountsDiv.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          this.toggleLike(likeIcon, likeCountsDiv);
+        }
+      });
 
       const likesElement = document.createElement("p");
       likesElement.classList.add("media-likes");
@@ -228,6 +243,7 @@ class PhotographerTemplate {
       likeCountsDiv.querySelector(".media-likes").textContent = `${
         currentLikes + 1
       }`;
+      this.updateTotalLikes(1); // Increment total likes
     } else {
       likeIcon.querySelector("path").setAttribute("fill", "none"); // Heart empty but with outline if "unliked"
       likeIcon
@@ -236,7 +252,13 @@ class PhotographerTemplate {
       likeCountsDiv.querySelector(".media-likes").textContent = `${
         currentLikes - 1
       }`;
+      this.updateTotalLikes(-1); // Decrement total likes
     }
+  }
+  updateTotalLikes(change) {
+    const totalLikesElement = document.querySelector(".total-likes");
+    const currentTotalLikes = parseInt(totalLikesElement.textContent, 10);
+    totalLikesElement.textContent = currentTotalLikes + change;
   }
 }
 

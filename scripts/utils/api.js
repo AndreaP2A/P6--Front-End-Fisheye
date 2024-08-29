@@ -1,8 +1,6 @@
-/**
- * API class to fetch data from the JSON
- */
 class API {
-  constructor(baseURL) {
+  constructor(baseURL = "./data") {
+    // Use a relative path (issue #1)
     this.baseURL = baseURL;
   }
 
@@ -37,5 +35,5 @@ class API {
   }
 }
 
-const api = new API("/data");
+const api = new API();
 export { api };

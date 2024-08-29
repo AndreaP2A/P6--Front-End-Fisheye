@@ -3,6 +3,9 @@ import { api } from "../utils/api.js";
 import { Lightbox } from "../utils/lightbox.js"; // Import Lightbox
 
 let sortedMedia = []; // Keep track of sorted media globally
+let contactButton; // Reference to the contact button for returning focus
+let contactModal; // Reference to the contact modal
+let focusableElements; // Store focusable elements in the modal
 
 /**
  * Display the photographer's information and media
@@ -164,6 +167,57 @@ async function displayPhotographer(photographer) {
     // If the imageContainer isn't found, fall back to appending it at the end of the main
     main.appendChild(priceLikesButton);
   }
+
+  // Create and append contact button
+  contactButton = document.createElement("button");
+  contactButton.classList.add("contact-button");
+  contactButton.textContent = "Contactez-moi";
+  contactButton.setAttribute("tabindex", "0");
+  contactButton.setAttribute("aria-label", "Contactez-moi");
+
+  main.appendChild(contactButton);
+
+  // Set up references to the modal and its focusable elements
+  contactModal = document.getElementById("contact_modal");
+  focusableElements = contactModal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+
+  // Open modal
+  contactButton.addEventListener("click", () => {
+    contactModal.setAttribute("aria-hidden", "false");
+    contactModal.style.display = "block";
+    contactButton.setAttribute("aria-expanded", "true");
+    // Focus the first element in the modal
+    focusableElements[0].focus();
+    // Trap focus within the modal
+    trapFocus(contactModal);
+  });
+
+  // Close modal
+  contactModal.querySelector(".close-modal").addEventListener("click", () => {
+    contactModal.setAttribute("aria-hidden", "true");
+    contactModal.style.display = "none";
+    contactButton.setAttribute("aria-expanded", "false");
+    contactButton.focus(); // Return focus to the contact button
+  });
+
+  // Close modal when clicking outside
+  window.addEventListener("click", (event) => {
+    if (event.target === contactModal) {
+      contactModal.querySelector(".close-modal").click();
+    }
+  });
+
+  // Handle keypress for closing the modal
+  window.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      contactModal.getAttribute("aria-hidden") === "false"
+    ) {
+      contactModal.querySelector(".close-modal").click();
+    }
+  });
 }
 
 /**
@@ -201,6 +255,36 @@ async function init() {
   } else {
     console.error("No photographer ID provided in the URL");
   }
+}
+
+/**
+ * Trap the focus within the contact modal
+ * @param {HTMLElement} modal - The modal element
+ */
+function trapFocus(modal) {
+  const focusableElements = modal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  const firstFocusableElement = focusableElements[0];
+  const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+  modal.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+      if (event.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstFocusableElement) {
+          event.preventDefault();
+          lastFocusableElement.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastFocusableElement) {
+          event.preventDefault();
+          firstFocusableElement.focus();
+        }
+      }
+    }
+  });
 }
 
 init();

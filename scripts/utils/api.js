@@ -1,5 +1,5 @@
 class API {
-  constructor(baseURL = "./data") {
+  constructor(baseURL = "../../data") {
     // Use a relative path (issue #1)
     this.baseURL = baseURL;
   }

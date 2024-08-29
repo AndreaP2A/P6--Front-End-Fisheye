@@ -106,7 +106,7 @@ class PhotographerTemplate {
     const contactButton = document.createElement("button");
     contactButton.classList.add("contact_button");
     contactButton.innerText = "Contactez-moi";
-    contactButton.setAttribute("aria-label", "Contact-me");
+    contactButton.setAttribute("aria-label", "Contactez-moi");
     contactButton.setAttribute("tabindex", "0");
 
     contactButton.addEventListener("click", () =>

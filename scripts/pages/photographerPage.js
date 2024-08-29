@@ -44,7 +44,7 @@ async function displayPhotographer(photographer) {
   const sortLabel = document.createElement("label");
   sortLabel.setAttribute("for", "sort-by");
   sortLabel.textContent = "Trier par ";
-  sortLabel.setAttribute("aria-label", "Order by");
+  sortLabel.setAttribute("aria-label", "Trier par");
   sortLabel.setAttribute("tabindex", "0");
 
   const sortSelect = document.createElement("select");

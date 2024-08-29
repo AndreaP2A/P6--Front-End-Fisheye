@@ -1,4 +1,5 @@
 import { MediaFactory } from "../factories/mediaFactory.js";
+import { setFocus, trapFocus } from "./focus.js";
 
 export class Lightbox {
   constructor(photographerName, sortedMedia) {
@@ -15,6 +16,8 @@ export class Lightbox {
     this.titleElement = this.lightboxModal.querySelector(
       ".lightbox-media-title"
     );
+    this.lastFocusedElement = null;
+    this.focusTrap = null;
 
     this.init();
   }
@@ -31,12 +34,30 @@ export class Lightbox {
    */
   openLightbox(index) {
     this.currentMediaIndex = index;
+    this.lastFocusedElement = document.activeElement; // Save the last focused element
     this.lightboxModal.style.display = "flex";
+    this.displayMediaInLightbox(this.sortedMedia[this.currentMediaIndex]);
+
+    // Focus management
+    const firstFocusableElement = this.lightboxModal.querySelector("button");
+    this.focusTrap = trapFocus(this.lightboxModal);
+    setFocus(firstFocusableElement);
+
     this.displayMediaInLightbox(this.sortedMedia[this.currentMediaIndex]);
   }
 
   closeLightbox() {
-    this.lightboxModal.style.display = "none";
+    if (this.lightboxModal.style.display === "flex") {
+      this.lightboxModal.style.display = "none";
+
+      // Remove focus trap
+      if (this.focusTrap) {
+        this.focusTrap();
+      }
+
+      // Restore focus to the last focused element (contact button or media item selected)
+      setFocus(this.lastFocusedElement);
+    }
   }
 
   /**

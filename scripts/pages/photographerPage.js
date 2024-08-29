@@ -5,9 +5,8 @@ import { Lightbox } from "../utils/lightbox.js"; // Import Lightbox
 let sortedMedia = []; // Keep track of sorted media globally
 
 /**
- *
- * @param {*} photographer
- * @returns {HTMLElement} Photographer information
+ * Display the photographer's information and media
+ * @param {*} photographer - The photographer data
  */
 async function displayPhotographer(photographer) {
   const main = document.querySelector("main");
@@ -85,7 +84,7 @@ async function displayPhotographer(photographer) {
       const mediaElement = mediaFactory.getMediaDOM();
       mediaContainer.appendChild(mediaElement.firstChild);
     });
-    lightbox.sortedMedia = sortedMedia; // Update lightbox with new sorted media (issue #2)
+    lightbox.sortedMedia = sortedMedia; // Update lightbox with new sorted media
   });
 
   // Add event listener for media clicks to open lightbox
@@ -96,7 +95,7 @@ async function displayPhotographer(photographer) {
     }
   });
 
-  // Add event listener for media keypress to open lightbox (issue #3)
+  // Add event listener for media keypress to open lightbox
   mediaContainer.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
       const mediaItemElement = event.target.closest(".item");
@@ -157,14 +156,21 @@ async function displayPhotographer(photographer) {
   priceLikesButton.appendChild(likesContainer);
   priceLikesButton.appendChild(priceElement);
 
-  document.body.appendChild(priceLikesButton); // Append to body so it overlays other content
+  // Append the price-likes-button to the appropriate place in the DOM
+  const imageContainer = document.querySelector(".image-container");
+  if (imageContainer) {
+    imageContainer.insertAdjacentElement("afterend", priceLikesButton);
+  } else {
+    // If the imageContainer isn't found, fall back to appending it at the end of the main
+    main.appendChild(priceLikesButton);
+  }
 }
 
 /**
- *
- * @param {*} media
- * @param {*} criteria
- * @returns {Array} Sorting function on the portfolio
+ * Sort media items based on the selected criteria
+ * @param {*} media - The list of media items
+ * @param {*} criteria - The criteria for sorting (e.g., likes, date, title)
+ * @returns {Array} - The sorted media items
  */
 function sortMedia(media, criteria) {
   return media.slice().sort((a, b) => {

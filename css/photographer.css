@@ -131,7 +131,7 @@ body {
   border-radius: 5px;
   width: 170px;
   height: 60px;
-  text-align: center;
+  text-align: left;
   color: white;
   background-color: var(--secondary-color);
 }

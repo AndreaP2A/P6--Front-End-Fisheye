@@ -7,7 +7,6 @@ let focusTrap;
  * @param {*} photographerName
  */
 function displayModal(photographerName) {
-  // To dynamically add the photographer's name to "Contactez-moi"
   const modalHeading = document.getElementById("modal_title");
   modalHeading.innerHTML = `Contactez-moi <br> ${photographerName}`;
 

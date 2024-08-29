@@ -3,22 +3,28 @@
 /**
  * Trap focus within the modal element.
  * @param {HTMLElement} modalElement - The modal element.
+ * @param {Function} onClose - Callback to call when the modal is closed.
  */
-export function trapFocus(modalElement) {
+export function trapFocus(modalElement, onClose) {
   const focusableElements = modalElement.querySelectorAll(
     'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
   );
-  const firstFocusableElement = focusableElements[0];
-  const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+  // Convert NodeList to Array for easier handling
+  const focusableArray = Array.from(focusableElements);
+  const firstFocusableElement = focusableArray[0];
+  const lastFocusableElement = focusableArray[focusableArray.length - 1];
 
   function handleTab(event) {
     if (event.key === "Tab") {
       if (event.shiftKey) {
+        // Shift + Tab
         if (document.activeElement === firstFocusableElement) {
           event.preventDefault();
           lastFocusableElement.focus();
         }
       } else {
+        // Tab
         if (document.activeElement === lastFocusableElement) {
           event.preventDefault();
           firstFocusableElement.focus();
@@ -27,10 +33,13 @@ export function trapFocus(modalElement) {
     }
   }
 
+  // Trap focus within the modal
   document.addEventListener("keydown", handleTab);
 
+  // Cleanup when modal is closed
   return () => {
     document.removeEventListener("keydown", handleTab);
+    if (onClose) onClose();
   };
 }
 

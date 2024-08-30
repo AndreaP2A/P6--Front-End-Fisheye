@@ -65,12 +65,12 @@ h1 {
 .photographer_section article .location {
   color: #901c1c;
   font-family: "DM Sans";
-  font-size: 13px;
+  font-size: 20px;
   font-weight: 400;
 }
 
 .photographer_section article .tagline {
-  font-size: 10px;
+  font-size: 16px;
   font-family: "DM Sans";
   color: black;
   font-weight: 400;
@@ -79,7 +79,7 @@ h1 {
 .photographer_section article .price {
   color: #757575;
   font-family: "DM Sans";
-  font-size: 9px;
+  font-size: 14px;
   font-weight: 400;
 }
 

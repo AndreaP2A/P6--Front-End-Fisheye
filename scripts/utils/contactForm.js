@@ -1,20 +1,25 @@
+import { trapFocus } from "./focusTrap.js"; // Import the focus trap function
+
 /**
  * Displaying the contact form with the name of the photographer
  * @param {*} photographerName
  */
 function displayModal(photographerName) {
-  console.log("La fonction d'affichage de cette modale s'est bien déclenché !"); // for debugging
-
-  // To dynamically add the photographer's name to "Contactez-moi"
   const modalHeading = document.getElementById("modal_title");
   modalHeading.innerHTML = `Contactez-moi <br> ${photographerName}`;
 
   const modal = document.getElementById("contact_modal");
-  if (modal) {
-    modal.style.display = "block";
-  } else {
-    console.error("Modal element not found");
-  }
+  const closeModalBtn = modal.querySelector(".close-modal");
+  modal.style.display = "block";
+
+  const firstFocusableElement = modal.querySelector(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  firstFocusableElement.focus();
+
+  trapFocus(modal); // Use the trapFocus function
+
+  closeModalBtn.addEventListener("click", closeModal);
 }
 
 /**
@@ -23,6 +28,11 @@ function displayModal(photographerName) {
 function closeModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
+
+  const triggerElement = document.querySelector('[aria-haspopup="dialog"]');
+  if (triggerElement) {
+    triggerElement.focus();
+  }
 }
 
 /**

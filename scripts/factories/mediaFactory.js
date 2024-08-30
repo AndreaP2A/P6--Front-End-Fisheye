@@ -1,7 +1,7 @@
 class MediaFactory {
   constructor(media, photographerName) {
     this.media = media;
-    this.photographerName = photographerName; // Use photographerName directly
+    this.photographerName = photographerName;
   }
 
   createMediaElement() {
@@ -26,6 +26,8 @@ class MediaFactory {
       video.appendChild(source);
       mediaDiv.appendChild(video);
     }
+
+    mediaDiv.setAttribute("aria-label", this.media.title); // Add aria-label to media element for accessibility
 
     return mediaDiv;
   }

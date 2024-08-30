@@ -1,3 +1,4 @@
+import { trapFocus } from "./focusTrap.js";
 import { MediaFactory } from "../factories/mediaFactory.js";
 
 export class Lightbox {
@@ -33,10 +34,24 @@ export class Lightbox {
     this.currentMediaIndex = index;
     this.lightboxModal.style.display = "flex";
     this.displayMediaInLightbox(this.sortedMedia[this.currentMediaIndex]);
+
+    const firstFocusableElement = this.lightboxModal.querySelector(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    firstFocusableElement.focus();
+
+    trapFocus(this.lightboxModal);
   }
 
   closeLightbox() {
     this.lightboxModal.style.display = "none";
+
+    const triggerElement = document.querySelector(
+      '.item[aria-haspopup="dialog"]'
+    );
+    if (triggerElement) {
+      triggerElement.focus();
+    }
   }
 
   /**

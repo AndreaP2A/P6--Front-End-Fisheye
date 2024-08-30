@@ -29,24 +29,24 @@
   <div id="contact_modal" class="modal">
     <div class="modal-content">
       <header>
-        <h2 id="modal_title">Contactez-moi</h2>
-        <img src="assets/icons/close.svg" alt="Fermer le formulaire de contact" class="close-modal">
+        <h2 id="modal_title" tabindex="0">Contactez-moi</h2>
+        <img src="assets/icons/close.svg" alt="Fermer le formulaire de contact" class="close-modal" tabindex="0">
       </header>
       <form>
         <div>
-          <label for="firstName">Prénom</label>
+          <label for="firstName" tabindex="0">Prénom</label>
           <input id="firstName" type="text" required>
         </div>
         <div>
-          <label for="lastName">Nom</label>
+          <label for="lastName" tabindex="0">Nom</label>
           <input id="lastName" type="text" required>
         </div>
         <div>
-          <label for="email">Email</label>
+          <label for="email" tabindex="0">Email</label>
           <input id="email" type="email" required>
         </div>
         <div>
-          <label for="message">Votre message</label>
+          <label for="message" tabindex="0">Votre message</label>
           <textarea id="message" required></textarea>
         </div>
         <button type="submit" class="contact_button">Envoyer</button>

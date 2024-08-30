@@ -108,6 +108,7 @@ class PhotographerTemplate {
     contactButton.innerText = "Contactez-moi";
     contactButton.setAttribute("aria-label", "Contactez-moi");
     contactButton.setAttribute("tabindex", "0");
+    contactButton.setAttribute("aria-haspopup", "dialog");
 
     contactButton.addEventListener("click", () =>
       displayModal(this.photographerName)

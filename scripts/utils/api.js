@@ -1,5 +1,8 @@
+/** rajouter "/P6--Front-End-Fisheye/data" avant GitHub Pages
+ * API class
+ */
 class API {
-  constructor(baseURL = "/P6--Front-End-Fisheye/data") {
+  constructor(baseURL = "/data") {
     // Use a relative path (issue #1)
     this.baseURL = baseURL;
   }

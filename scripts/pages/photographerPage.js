@@ -1,12 +1,14 @@
 import { PhotographerTemplate } from "../templates/photographerTemplate.js";
 import { api } from "../utils/api.js";
-import { Lightbox } from "../utils/lightbox.js"; // Import Lightbox
+import { Lightbox } from "../utils/lightbox.js";
 
 let sortedMedia = []; // Keep track of sorted media globally
 
 /**
- * Display the photographer's information and media
- * @param {*} photographer - The photographer data
+ * Displays the photographer's information and media on the page.
+ *
+ * @param {Object} photographer - The photographer object.
+ * @returns {Promise<void>} - A promise that resolves when the photographer's information and media are displayed.
  */
 async function displayPhotographer(photographer) {
   const main = document.querySelector("main");
@@ -167,10 +169,11 @@ async function displayPhotographer(photographer) {
 }
 
 /**
- * Sort media items based on the selected criteria
- * @param {*} media - The list of media items
- * @param {*} criteria - The criteria for sorting (e.g., likes, date, title)
- * @returns {Array} - The sorted media items
+ * Sorts the given media array based on the specified criteria.
+ *
+ * @param {Array} media - The array of media objects to be sorted.
+ * @param {string} criteria - The criteria to sort the media by. Possible values are "likes", "date", and "title".
+ * @returns {Array} - The sorted media array.
  */
 function sortMedia(media, criteria) {
   return media.slice().sort((a, b) => {
@@ -185,7 +188,11 @@ function sortMedia(media, criteria) {
 }
 
 /**
- * Initialize the page
+ * Initializes the photographer page.
+ * Retrieves the photographer ID from the URL parameters and fetches the corresponding photographer data from the API.
+ * If the photographer is found, it displays the photographer's information.
+ * Otherwise, it logs an error message.
+ * @returns {Promise<void>} A promise that resolves when the initialization is complete.
  */
 async function init() {
   const params = new URLSearchParams(window.location.search);

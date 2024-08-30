@@ -65,15 +65,16 @@ body {
   margin: 0;
 }
 
+.tagline,
+.location {
+  padding: 5px 0px;
+}
+
 .photograph-header p.location {
   color: var(--secondary-color);
   font-size: 24px;
   font-weight: 400;
   margin: 0;
-}
-
-.photographer-header p.tagline {
-  padding: 10px 0px;
 }
 
 .contact_button {

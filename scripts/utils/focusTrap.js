@@ -1,3 +1,8 @@
+/**
+ * Traps the focus within a modal element.
+ *
+ * @param {HTMLElement} modal - The modal element to trap the focus within (lightbox or contact form).
+ */
 export function trapFocus(modal) {
   const focusableElements = modal.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'

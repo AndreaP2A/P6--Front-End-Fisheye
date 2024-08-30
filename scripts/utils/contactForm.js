@@ -1,8 +1,10 @@
-import { trapFocus } from "./focusTrap.js"; // Import the focus trap function
+import { trapFocus } from "./focusTrap.js";
 
 /**
- * Displaying the contact form with the name of the photographer
- * @param {*} photographerName
+ * Displays a modal with the given photographer's name and gets the focus
+ *
+ * @param {string} photographerName - The name of the photographer.
+ * @returns {void}
  */
 function displayModal(photographerName) {
   const modalHeading = document.getElementById("modal_title");
@@ -17,13 +19,13 @@ function displayModal(photographerName) {
   );
   firstFocusableElement.focus();
 
-  trapFocus(modal); // Use the trapFocus function
+  trapFocus(modal);
 
   closeModalBtn.addEventListener("click", closeModal);
 }
 
 /**
- * Closes the modal
+ * Closes the modal and loses the focus
  */
 function closeModal() {
   const modal = document.getElementById("contact_modal");
@@ -36,37 +38,39 @@ function closeModal() {
 }
 
 /**
- * Handles the form submission, logs the form data, and closes the modal.
+ * Handles the form submission, logs the form data in the console and closes the modal.
  * @param {Event} event
  */
 function handleFormSubmit(event) {
   event.preventDefault(); // Prevents the default form submission behavior
 
-  // Collect the form data
   const firstName = document.getElementById("firstName").value;
   const lastName = document.getElementById("lastName").value;
   const email = document.getElementById("email").value;
   const message = document.getElementById("message").value;
 
-  // Log the form data to the console
   console.log("Form Submitted!");
   console.log("Prénom:", firstName);
   console.log("Nom:", lastName);
   console.log("Email:", email);
   console.log("Message:", message);
 
-  // Close the modal after submission
   closeModal();
 }
 
-// Event listener to close the modal when close button is clicked
+/**
+ * Event listener to close the modal when close button is clicked
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
   const closeModalBtn = document.querySelector(".close-modal");
   if (closeModalBtn) {
     closeModalBtn.addEventListener("click", closeModal);
   }
 
-  // Add an event listener to the form's submit button
+  /**
+   * Event listener to handle form submission
+   */
   const form = document.querySelector("#contact_modal form");
   if (form) {
     form.addEventListener("submit", handleFormSubmit);

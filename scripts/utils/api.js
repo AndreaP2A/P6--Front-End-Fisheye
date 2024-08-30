@@ -1,14 +1,16 @@
-/** rajouter "/P6--Front-End-Fisheye/data" avant GitHub Pages
- * API class
+/**
+ * API utils
+ * @constructor
+ * @param {string} [baseURL="/P6--Front-End-Fisheye/data"] - The base URL for the API.
  */
 class API {
   constructor(baseURL = "/P6--Front-End-Fisheye/data") {
-    // Use a relative path (issue #1)
     this.baseURL = baseURL;
   }
 
   /**
-   *
+   * Fetches a list of photographers.
+   * @async
    * @returns {Promise<Array>} List of photographers
    */
   async fetchPhotographers() {
@@ -23,8 +25,9 @@ class API {
   }
 
   /**
-   *
-   * @returns {Promise<Array>} List of media
+   * Fetches a list of medias.
+   * @async
+   * @returns {Promise<Array>} List of medias
    */
   async fetchMedia() {
     const response = await fetch(`${this.baseURL}/photographers.json`);
@@ -32,6 +35,11 @@ class API {
     return data.media;
   }
 
+  /**
+   * Fetches media by photographer ID.
+   * @param {number} id - The ID of the photographer.
+   * @returns {Array} - An array of media objects filtered by the photographer ID.
+   */
   async fetchMediaByPhotographerId(id) {
     const media = await this.fetchMedia();
     return media.filter((item) => item.photographerId == id);

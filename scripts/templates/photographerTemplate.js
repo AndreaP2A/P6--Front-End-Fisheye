@@ -1,6 +1,13 @@
 import { MediaFactory } from "../factories/mediaFactory.js";
 import { displayModal } from "../utils/contactForm.js";
 
+/**
+ * Represents a photographer template.
+ * @class
+ * @param {Object} data - The data object containing photographer information.
+ * @param {Array} [mediaItems=[]] - The array of media items associated with the photographer.
+ * @param {number} tabindexStart - The starting tabindex value for the template.
+ */
 class PhotographerTemplate {
   constructor(data, mediaItems = [], tabindexStart) {
     this.data = data;
@@ -223,9 +230,11 @@ class PhotographerTemplate {
   }
 
   /**
+   * Toggles the like status of a media item and updates the like count.
    *
-   * @param {*} likeIcon
-   * @param {*} likeCountsDiv
+   * @param {HTMLElement} likeIcon - The like icon element.
+   * @param {HTMLElement} likeCountsDiv - The container element for displaying the like count.
+   * @returns {void}
    */
   toggleLike(likeIcon, likeCountsDiv) {
     const isLiked = likeIcon.classList.toggle("liked");
@@ -256,6 +265,13 @@ class PhotographerTemplate {
       this.updateTotalLikes(-1); // Decrement total likes
     }
   }
+
+  /**
+   * Updates the total number of likes.
+   *
+   * @param {number} change - The change in the total number of likes.
+   * @returns {void}
+   */
   updateTotalLikes(change) {
     const totalLikesElement = document.querySelector(".total-likes");
     const currentTotalLikes = parseInt(totalLikesElement.textContent, 10);

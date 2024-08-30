@@ -1,9 +1,18 @@
+/**
+ * Represents a MediaFactory.
+ * @class
+ */
 class MediaFactory {
   constructor(media, photographerName) {
     this.media = media;
     this.photographerName = photographerName;
   }
 
+  /**
+   * Creates a media element based on the type of media (image or video from the portfolio of the photographer).
+   *
+   * @returns {HTMLDivElement} The created media element.
+   */
   createMediaElement() {
     const mediaDiv = document.createElement("div");
     mediaDiv.classList.add("media");

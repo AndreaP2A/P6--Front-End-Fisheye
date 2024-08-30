@@ -2,6 +2,12 @@ import { trapFocus } from "./focusTrap.js";
 import { MediaFactory } from "../factories/mediaFactory.js";
 
 export class Lightbox {
+  /**
+   * Represents a Lightbox object.
+   * @constructor
+   * @param {string} photographerName - The name of the photographer.
+   * @param {Array} sortedMedia - The sorted media array.
+   */
   constructor(photographerName, sortedMedia) {
     this.photographerName = photographerName;
     this.sortedMedia = sortedMedia;
@@ -20,6 +26,14 @@ export class Lightbox {
     this.init();
   }
 
+  /**
+   * Initializes the lightbox functionality.
+   *
+   * @memberof Lightbox
+   * @function init
+   * @instance
+   * @description Binds event listeners to the close, next, and previous buttons.
+   */
   init() {
     this.closeModalButton.addEventListener("click", () => this.closeLightbox());
     this.nextButton.addEventListener("click", () => this.showNextMedia());
@@ -27,8 +41,10 @@ export class Lightbox {
   }
 
   /**
+   * Opens the lightbox and displays the media at the specified index (sorted).
    *
-   * @param {*} index
+   * @param {number} index - The index of the media to be displayed in the lightbox (sorted).
+   * @returns {void}
    */
   openLightbox(index) {
     this.currentMediaIndex = index;
@@ -43,6 +59,9 @@ export class Lightbox {
     trapFocus(this.lightboxModal);
   }
 
+  /**
+   * Closes the lightbox modal.
+   */
   closeLightbox() {
     this.lightboxModal.style.display = "none";
 
@@ -55,8 +74,9 @@ export class Lightbox {
   }
 
   /**
+   * Displays the given media item in a lightbox.
    *
-   * @param {*} mediaItem
+   * @param {Object} mediaItem - The media item to be displayed.
    */
   displayMediaInLightbox(mediaItem) {
     this.lightboxContent.innerHTML = "";
@@ -70,12 +90,18 @@ export class Lightbox {
     }
   }
 
+  /**
+   * Shows the next media in the lightbox.
+   */
   showNextMedia() {
     if (this.currentMediaIndex < this.sortedMedia.length - 1) {
       this.openLightbox(this.currentMediaIndex + 1);
     }
   }
 
+  /**
+   * Shows the previous media in the lightbox.
+   */
   showPrevMedia() {
     if (this.currentMediaIndex > 0) {
       this.openLightbox(this.currentMediaIndex - 1);
@@ -83,9 +109,11 @@ export class Lightbox {
   }
 
   /**
+   * Handles the click event on a media item element within a media container.
    *
-   * @param {*} mediaItemElement
-   * @param {*} mediaContainer
+   * @param {HTMLElement} mediaItemElement - The clicked media item element.
+   * @param {HTMLElement} mediaContainer - The container element that holds the media items.
+   * @returns {void}
    */
   handleMediaClick(mediaItemElement, mediaContainer) {
     const index = Array.from(mediaContainer.children).indexOf(mediaItemElement);

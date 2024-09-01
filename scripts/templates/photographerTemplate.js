@@ -31,6 +31,7 @@ class PhotographerTemplate {
     link.setAttribute("href", `photographer.html?${params.toString()}`);
     link.setAttribute("class", "link");
     link.setAttribute("tabindex", "0");
+    link.setAttribute("aria-label", name);
     link.style.cursor = "pointer";
 
     const img = document.createElement("img");

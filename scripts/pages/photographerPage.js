@@ -120,11 +120,13 @@ async function displayPhotographer(photographer) {
 
   const likesContainer = document.createElement("div");
   likesContainer.classList.add("likes-container");
+  likesContainer.setAttribute("aria-label", "likes");
 
   const likesElement = document.createElement("p");
   likesElement.classList.add("total-likes");
   likesElement.textContent = `${totalLikes}`;
   likesElement.setAttribute("aria-label", `${totalLikes} likes`);
+  likesElement.setAttribute("aria-hidden", "true");
 
   const heartIcon = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -134,6 +136,7 @@ async function displayPhotographer(photographer) {
   heartIcon.setAttribute("height", "22");
   heartIcon.setAttribute("viewBox", "0 0 21 24");
   heartIcon.setAttribute("fill", "black");
+  heartIcon.setAttribute("aria-hidden", "true");
   heartIcon.classList.add("heart-icon");
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
   path.setAttribute(

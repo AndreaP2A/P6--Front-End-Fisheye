@@ -7,7 +7,7 @@
 
 <p align="center"><img src="https://andreap2a.github.io/P6--Front-End-Fisheye/assets/images/mockup.png" alt="Mockup de projet FishEye"></p>
   <p align="center">
-  FishEye est un site web qui permet aux photographes indépendants de présenter leurs meilleurs travaux. Suite à demande de refonte du site, ce dernier a été réinventé tout respectant au maximum les normes d'accessibilité WCAG et promettant un code maintenable.<br />
+  FishEye est un site web qui permet aux photographes indépendants de présenter leurs meilleurs travaux. Suite à une demande de refonte du site, ce dernier a été réinventé tout respectant au maximum les normes d'accessibilité WCAG et promettant un code maintenable.<br />
     <br />
   </p>
 </div>

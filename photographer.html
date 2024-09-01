@@ -11,22 +11,23 @@
 </head>
 
 <body>
-  <header>
+  <header role="banner">
     <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" tabindex="0">
   </header>
-  <main id="main">
+  <main id="main" role="main">
     <div class="photograph-header">
     </div>
     <div class="sort-container">
       <label for="sort-by">Trier par </label>
-      <select id="sort-by" aria-label="Trier les médias">
+      <select id="sort-by" aria-label="Trier les médias" aria-live="polite">
         <option value="likes">Popularité</option>
         <option value="date">Date</option>
         <option value="title">Titre</option>
       </select>
     </div>
   </main>
-  <div id="contact_modal" class="modal">
+
+  <div id="contact_modal" class="modal" role="dialog">
     <div class="modal-content">
       <header>
         <h2 id="modal_title" tabindex="0">Contactez-moi</h2>
@@ -54,14 +55,14 @@
     </div>
   </div>
 
-  <div id="lightbox_modal" class="lightbox-modal" role="dialog" aria-labelledby="lightbox-media-title">
+  <div id="lightbox_modal" class="lightbox-modal" aria-labelledby="lightbox-media-title" role="dialog">
     <!-- Whole Lightbox Container -->
     <div class="lightbox-content" aria-label="Image closeup view" tabindex="0">
       <!-- Media Container -->
       <div class="lightbox-media-container">
       </div>
       <!-- Media Title -->
-      <p class="lightbox-media-title" tabindex="0"></p>
+      <p id="lightbox-media-title" class="lightbox-media-title" tabindex="0"></p>
       <!-- Navigation Buttons -->
       <button id="prevButton" class="lightbox-prev" aria-label="Previous media"></button>
       <button id="nextButton" class="lightbox-next" aria-label="Next media"></button>

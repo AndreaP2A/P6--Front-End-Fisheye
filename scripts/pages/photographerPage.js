@@ -117,10 +117,14 @@ async function displayPhotographer(photographer) {
   const priceLikesButton = document.createElement("div");
   priceLikesButton.classList.add("price-likes-button");
   priceLikesButton.setAttribute("tabindex", "0");
+  priceLikesButton.setAttribute(
+    "aria-label",
+    `${totalLikes} likes, ${photographer.price} € par jour`
+  );
 
   const likesContainer = document.createElement("div");
   likesContainer.classList.add("likes-container");
-  likesContainer.setAttribute("aria-label", `${totalLikes} likes`);
+  likesContainer.setAttribute("aria-hidden", "true");
 
   const likesElement = document.createElement("p");
   likesElement.classList.add("total-likes");
@@ -152,10 +156,6 @@ async function displayPhotographer(photographer) {
   const priceElement = document.createElement("p");
   priceElement.classList.add("price");
   priceElement.textContent = `${photographer.price} € / jour`;
-  priceElement.setAttribute(
-    "aria-label",
-    `${photographer.price} euros par jour`
-  );
 
   priceLikesButton.appendChild(likesContainer);
   priceLikesButton.appendChild(priceElement);

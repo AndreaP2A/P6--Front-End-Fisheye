@@ -50,6 +50,10 @@ class PhotographerTemplate {
     description.setAttribute("class", "description");
     description.setAttribute("role", "presentation");
     description.setAttribute("tabindex", "0");
+    description.setAttribute(
+      "aria-label",
+      `${city}, ${country}, ${tagline}, ${price} euros par jour`
+    );
 
     const location = document.createElement("p");
     location.innerText = `${city}, ${country}`;

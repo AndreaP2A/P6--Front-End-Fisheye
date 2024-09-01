@@ -120,12 +120,11 @@ async function displayPhotographer(photographer) {
 
   const likesContainer = document.createElement("div");
   likesContainer.classList.add("likes-container");
-  likesContainer.setAttribute("aria-label", "likes");
+  likesContainer.setAttribute("aria-label", `${totalLikes} likes`);
 
   const likesElement = document.createElement("p");
   likesElement.classList.add("total-likes");
   likesElement.textContent = `${totalLikes}`;
-  likesElement.setAttribute("aria-label", `${totalLikes} likes`);
   likesElement.setAttribute("aria-hidden", "true");
 
   const heartIcon = document.createElementNS(

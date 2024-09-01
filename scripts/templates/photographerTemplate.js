@@ -30,18 +30,17 @@ class PhotographerTemplate {
     const link = document.createElement("a");
     link.setAttribute("href", `photographer.html?${params.toString()}`);
     link.setAttribute("class", "link");
-    link.setAttribute("aria-labelledby", `${name}-title`);
     link.setAttribute("tabindex", "0");
     link.style.cursor = "pointer";
 
     const img = document.createElement("img");
     img.setAttribute("src", this.picture);
-    img.setAttribute("alt", name);
+    img.setAttribute("alt", "");
+    img.setAttribute("aria-hidden", "true");
     img.style.cursor = "pointer";
 
     const h2 = document.createElement("h2");
     h2.innerText = name;
-    h2.setAttribute("id", `${name}-title`);
     h2.style.cursor = "pointer";
 
     link.appendChild(img);
@@ -59,17 +58,14 @@ class PhotographerTemplate {
     const location = document.createElement("p");
     location.innerText = `${city}, ${country}`;
     location.setAttribute("class", "location");
-    location.setAttribute("aria-label", `${city}, ${country}`);
 
     const taglineElement = document.createElement("p");
     taglineElement.innerText = tagline;
     taglineElement.setAttribute("class", "tagline");
-    taglineElement.setAttribute("aria-label", `${tagline}`);
 
     const priceElement = document.createElement("p");
     priceElement.innerText = `${price}€/jour`;
     priceElement.setAttribute("class", "price");
-    priceElement.setAttribute("aria-label", `${price} euros par jour`);
 
     description.appendChild(location);
     description.appendChild(taglineElement);

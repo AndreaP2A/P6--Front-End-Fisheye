@@ -62,7 +62,7 @@ async function displayPhotographer(photographer) {
     const option = document.createElement("option");
     option.value = optionData.value;
     option.textContent = optionData.text;
-    option.setAttribute("aria-label", optionData.text); // Ensure each option is labeled
+    option.setAttribute("aria-label", optionData.text);
     sortSelect.appendChild(option);
   });
 

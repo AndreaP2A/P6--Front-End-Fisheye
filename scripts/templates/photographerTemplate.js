@@ -30,7 +30,7 @@ class PhotographerTemplate {
     const link = document.createElement("a");
     link.setAttribute("href", `photographer.html?${params.toString()}`);
     link.setAttribute("class", "link");
-    link.setAttribute("aria-labelledby", `${h2.id}`);
+    link.setAttribute("aria-labelledby", `${name}-title`);
     link.setAttribute("tabindex", "0");
     link.style.cursor = "pointer";
 
